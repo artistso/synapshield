@@ -60,11 +60,9 @@ class ClinicalStressTestEngine:
             # Base pathogen load
             "initial_load": np.random.normal(loc=1.0e-2, scale=0.15e-2),
 
-            # Anti-crystallization agents (PEG and PVP)
+            # Anti-crystallization agents (PEG)
             "D_peg": np.random.normal(loc=1.0e-10, scale=0.1e-10),
-            "D_pvp": np.random.normal(loc=0.9e-10, scale=0.1e-10),
-            "initial_peg": np.random.normal(loc=10.0, scale=1.0),
-            "initial_pvp": np.random.normal(loc=10.0, scale=1.0)
+            "initial_peg": np.random.normal(loc=10.0, scale=1.0)
         }
         return params
 
@@ -102,7 +100,6 @@ class ClinicalStressTestEngine:
         C_cort = y[4*N:5*N]
         B_cort = y[5*N:6*N]
         C_peg  = y[6*N:7*N]
-        C_pvp  = y[7*N:8*N]
 
         dC_ibu  = np.zeros(N)
         dC_egcg = np.zeros(N)
@@ -111,7 +108,6 @@ class ClinicalStressTestEngine:
         dC_cort = np.zeros(N)
         dB_cort = np.zeros(N)
         dC_peg  = np.zeros(N)
-        dC_pvp  = np.zeros(N)
 
         # Run spatial integration
         for i in range(1, N-1):
@@ -125,17 +121,16 @@ class ClinicalStressTestEngine:
 
             hydration_factor = H_gel[i] / 0.95
 
-            # Plasticizer boost from PEG and PVP prevents crystalline precipitation
-            plasticizer_boost = 1.0 + 0.1 * C_peg[i] + 0.1 * C_pvp[i]
+            # Plasticizer boost from PEG prevents crystalline precipitation
+            plasticizer_boost = 1.0 + 0.1 * C_peg[i]
 
             D_ibu_eff  = p["D_ibu"] * hydration_factor * plasticizer_boost
             D_egcg_eff = p["D_egcg"] * hydration_factor * plasticizer_boost
             D_syn_eff  = p["D_syn"] * hydration_factor
             D_cort_eff = p["D_cort"] * hydration_factor
 
-            # PEG and PVP Diffusion
+            # PEG Diffusion
             dC_peg[i] = p["D_peg"] * hydration_factor * (C_peg[i+1] - 2*C_peg[i] + C_peg[i-1]) / self.dx**2
-            dC_pvp[i] = p["D_pvp"] * hydration_factor * (C_pvp[i+1] - 2*C_pvp[i] + C_pvp[i-1]) / self.dx**2
 
             # Cortisone Transient Burst
             r_cort_burst = p["k_cort_burst"] * B_cort[i] if in_gel else 0.0
@@ -165,7 +160,6 @@ class ClinicalStressTestEngine:
         dC_syn[0]  = dC_syn[1]
         dC_cort[0] = dC_cort[1]
         dC_peg[0]  = dC_peg[1]
-        dC_pvp[0]  = dC_pvp[1]
 
         # Mucosa interface (Right Boundary) with stochastic pathogen spikes
         dC_ibu[-1]  = dC_ibu[-2]
@@ -173,7 +167,6 @@ class ClinicalStressTestEngine:
         dH_gel[-1]  = dH_gel[-2]
         dC_cort[-1] = dC_cort[-2]
         dC_peg[-1]  = dC_peg[-2]
-        dC_pvp[-1]  = dC_pvp[-2]
 
         # Apply non-steady-state influx spike function to mucosal boundary node
         current_stochastic_load = self.simulate_stochastic_pathogen_influx(t, p["initial_load"])
@@ -182,7 +175,7 @@ class ClinicalStressTestEngine:
         # Force Mucosal node to current calculated dynamic load
         C_syn[-1] = current_stochastic_load
 
-        return np.concatenate([dC_ibu, dC_egcg, dC_syn, dH_gel, dC_cort, dB_cort, dC_peg, dC_pvp])
+        return np.concatenate([dC_ibu, dC_egcg, dC_syn, dH_gel, dC_cort, dB_cort, dC_peg])
 
     def run_stress_trial(self, trial_id, time_days=15):
         """
@@ -199,9 +192,8 @@ class ClinicalStressTestEngine:
         C_cort_0 = np.zeros(self.N)
         B_cort_0 = np.array([p["initial_B_cort"] if xi <= self.L_gel else 0.0 for xi in self.x])
         C_peg_0  = np.array([p["initial_peg"] if xi <= self.L_gel else 0.0 for xi in self.x])
-        C_pvp_0  = np.array([p["initial_pvp"] if xi <= self.L_gel else 0.0 for xi in self.x])
 
-        y_init = np.concatenate([C_ibu_0, C_egcg_0, C_syn_0, H_gel_0, C_cort_0, B_cort_0, C_peg_0, C_pvp_0])
+        y_init = np.concatenate([C_ibu_0, C_egcg_0, C_syn_0, H_gel_0, C_cort_0, B_cort_0, C_peg_0])
 
         sol = solve_ivp(
             lambda t, y: self.pde_system_stochastic(t, y, p),
@@ -309,4 +301,4 @@ class ClinicalStressTestEngine:
 if __name__ == "__main__":
     engine = ClinicalStressTestEngine()
     # Runs a comprehensive cohort trial to analyze model limits under biological noise
-    cohort_results, failure_prob = engine.run_cohort_analysis(cohort_size=15, time_days=10)
+    cohort_results, failure_prob = engine.run_cohort_analysis(cohort_size=50, time_days=10)
