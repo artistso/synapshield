@@ -153,7 +153,7 @@ dCbound/dt = -kerosion*(Cbound)ⁿ   where n < 1 (dispersive)
 
 Target erosion: `kerosion ≈ 10⁻^1⁵ s⁻^1` (long-term); computational validation uses `kcleave = 1.5x10⁻⁵ s⁻^1` for accelerated in silico testing, scaled to 15-year zero-order via reservoir engineering.
 
-### 2.3 Computational Model: 4-Species PDE Solver
+### 2.3 Computational Model: 7-Species PDE Solver
 
 We developed a partial differential equation (PDE) model to simulate drug release and alpha--synuclein transport in the duodenal tissue.
 
@@ -257,7 +257,7 @@ Behind every equation is a person. Behind every simulation is a patient waiting 
 | **Stem Cell Therapy** | Cell replacement | Immunosuppression, tumors | No cells needed |
 | **Oral Ibuprofen** | Anti-inflammatory | Gastric ulcers, short half-life | Localized, 15-year release |
 
-### 4.3 Computational Breakthrough: 4-Species Model
+### 4.3 Computational Breakthrough: 7-Species Model
 
 Previous computational models of PD therapeutics only tracked drug concentrations. **SynapShield is the first to model the pathogen (alpha--synuclein) itself**, proving that the hydrogel intercepts the disease cascade at the molecular level.
 
@@ -272,7 +272,7 @@ Previous computational models of PD therapeutics only tracked drug concentration
 We have designed, modeled, and computationally validated SynapShield: a bioengineered hydrogel that intercepts Parkinson's disease at its gut-brain origin. By targeting the vagus nerve interface 15-20 years before motor symptoms appear, SynapShield offers a paradigm shift from **reactive** to **interceptive** neurodegenerative therapeutics.
 
 **Key Achievements:**
-1. ✅ 4-species PDE model (drugs + pathogen)
+1. ✅ 7-species PDE model (drugs, pathogen, cortisone, peg)
 2. ✅ >94% alpha--synuclein reduction at vagal boundary (7d), >99.99% (1yr)
 3. ✅ 15-year zero-order drug release profile
 4. ✅ Shear-thinning injectable biomaterial
@@ -337,7 +337,7 @@ synapshield/
 │   └── math-models.md               # PDE derivations
 ├── simulations/
 │   ├── python/
-│   │   ├── synapshield_pde_solver.py  # 4-species solver
+│   │   ├── synapshield_pde_solver.py  # 7-species solver
 │   │   ├── fenicsx_poroelastic.py
 │   │   └── multiphysics_integration.py
 │   ├── matlab/

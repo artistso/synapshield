@@ -110,7 +110,7 @@ Where `n < 1` for shear-thinning behavior
 d[alpha--syn]/dt = -(Vmax*[alpha--syn])/(Km + [alpha--syn])
 ```
 
-**Full 4-species PDE:**
+**Full 7-species PDE:**
 ```
 ∂C₄/∂t = D₄*∇^2C₄ - (Vmax*C₄)/(Km + C₄) - kclear*(C₁ + C₂)*C₄
 ```
@@ -124,7 +124,7 @@ Where C₄ = alpha--synuclein (the pathogen)
 - **Python finite element analysis** (see `/simulations/python/`)
 - **MATLAB PDE solvers** (see `/simulations/matlab/`)
 - **FEniCSx poroelastic multiphysics** (see `/simulations/python/fenicsx_poroelastic.py`)
-- **4-species model**: Caffeine, Ibuprofen, Bound Drug, Alpha-Synuclein
+- **7-species model**: Caffeine, Ibuprofen, Bound Drug, Alpha-Synuclein, Cortisone, Bound Cortisone, PEG (Plasticizer)
 
 ### Key Findings
 ✅ Hydrogel localizes within 0.5mm of injection site  
@@ -170,7 +170,7 @@ synapshield/
 │   └── math-models.md          # PDE derivations
 ├── simulations/
 │   ├── python/
-│   │   ├── synapshield_pde_solver.py  # 4-species PDE solver
+│   │   ├── synapshield_pde_solver.py  # 7-species PDE solver
 │   │   ├── fenicsx_poroelastic.py
 │   │   └── multiphysics_integration.py
 │   ├── matlab/
@@ -214,7 +214,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 # numpy==1.26.4 scipy==1.13.1 matplotlib==3.9.0
 
-# Run the 4-species PDE solver
+# Run the 7-species PDE solver
 cd simulations/python
 python synapshield_pde_solver.py
 # ~2-4 min runtime, outputs synapshield_results.png
