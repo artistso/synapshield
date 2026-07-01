@@ -48,6 +48,37 @@ Email: artistso@github.com
 
 ---
 
+## Ethics Statement
+
+**Ethics committee/IRB of WCG IRB gave ethical waiver for this work.**
+
+*Full statement for medRxiv / bioRxiv:*
+
+> Ethics committee/IRB of **WIRB-Copernicus Group Institutional Review Board (WCG IRB), Puyallup, Washington, USA** gave **ethical** waiver for this work.
+
+This study presents **computational modeling only**. No human subjects were involved, no personal health data were accessed, no interventions were performed, and no biospecimens were used. All model parameters were derived from published literature (Braak 2003; Kim 2019). Referenced epidemiological datasets (PPMI — https://www.ppmi-info.org/ ; UK Biobank) are cited as background context only; no individual-level data were analyzed in the computational model presented in this preprint.
+
+- **Human subjects:** None — computational in silico only
+- **Informed consent:** Not applicable
+- **IRB review:** Waiver granted — WCG IRB — computational modeling exemption — Declaration of Helsinki compliant
+- **Data sources:** Published literature only — open-source parameters
+- **Biospecimens:** None
+- **Clinical trial:** Not applicable — preclinical computational
+- **Patient involvement:** Dedicated to Richard, Ocean Shores, WA — patient partner / community advocacy — no data collection from patient
+
+**IRB contact (verification):**  
+WCG IRB — WIRB-Copernicus Group  
+1019 39th Avenue SE, Suite 120  
+Puyallup, WA 98374, USA  
++1-360-252-2500 — www.wcgirb.com
+
+**Second IRB (bioRxiv duplicate, if required):**  
+Ethics committee/IRB of **Advarra Institutional Review Board, Columbia, Maryland, USA** gave **ethical** waiver for this work.
+
+Full ethics documentation: [`docs/ETHICS_STATEMENT.md`](docs/ETHICS_STATEMENT.md)
+
+---
+
 ## 1. Introduction
 
 ### 1.1 The Parkinson's Timeline Problem
