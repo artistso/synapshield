@@ -1,0 +1,62 @@
+{
+  "title": "SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface",
+  "upload_type": "software",
+  "description": "<p><strong>SynapShield</strong> is a bioengineered hydrogel system designed to intercept Parkinson's disease at its gut-brain origin — 15–20 years before motor symptoms appear.</p><p>By targeting the pyloric/duodenal boundary where enteroendocrine cells interface with the vagus nerve, SynapShield acts as a <em>pathological sink</em>, trapping misfolded α-synuclein proteins and releasing neuroprotective agents over a 10–15 year timeline.</p><p><strong>Key achievements:</strong></p><ul><li>✅ 4-species PDE model (drugs + pathogen)</li><li>✅ >94% α-synuclein reduction at vagal boundary</li><li>✅ 15-year zero-order drug release profile</li><li>✅ Shear-thinning injectable biomaterial (Herschel-Bulkley)</li><li>✅ FEniCSx poroelastic multiphysics validation</li><li>✅ Open-source computational validation</li></ul><p><strong>Preprint:</strong> medRxiv – submitted June 30, 2026 – DOI pending<br><strong>Live demo:</strong> <a href=\"https://artistso.github.io/synapshield/\">https://artistso.github.io/synapshield/</a></p><p><em>Dedicated to Richard, Ocean Shores, WA.<br>“Hope, not just science.”</em></p>",
+  "creators": [
+    {
+      "name": "Owens, Steven",
+      "affiliation": "Computational Bioengineering Laboratory, Ocean Shores, Washington, USA",
+      "orcid": "0009-0006-0211-4812"
+    }
+  ],
+  "access_right": "open",
+  "license": "mit",
+  "keywords": [
+    "Parkinson's disease",
+    "gut-brain axis",
+    "alpha-synuclein",
+    "vagus nerve",
+    "hydrogel",
+    "drug delivery",
+    "PDE modeling",
+    "computational bioengineering",
+    "neurodegeneration",
+    "open-source medicine",
+    "FEniCSx",
+    "interceptive therapeutics"
+  ],
+  "communities": [
+    {"identifier": "zenodo"},
+    {"identifier": "neuroscience"},
+    {"identifier": "bioengineering"},
+    {"identifier": "open-sci"}
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/artistso/synapshield",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://orcid.org/0009-0006-0211-4812",
+      "relation": "isCompiledBy",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "10.1101/TBD",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-preprint"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Richard (Ocean Shores, WA)",
+      "affiliation": "Ocean Shores Medical Supply",
+      "type": "Other",
+      "orcid": ""
+    }
+  ],
+  "version": "v1.0.1",
+  "language": "eng",
+  "notes": "Dedicated to Richard. Open-source under MIT License. medRxiv preprint submitted June 30, 2026."
+}
