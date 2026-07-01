@@ -8,10 +8,10 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](requirements.txt)
 [![version](https://img.shields.io/badge/version-v1.0.1-blue.svg)](https://github.com/artistso/synapshield/releases/tag/v1.0.0)
 
-> **Intercepting Parkinson's disease 15 years before it starts — at the gut-brain axis.**
+> **Intercepting Parkinson's disease 15 years before it starts - at the gut-brain axis.**
 >
-> medRxiv preprint — submitted June 30, 2026 — DOI pending  
-> **Steven Owens** — ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
+> medRxiv preprint - submitted June 30, 2026 - DOI pending  
+> **Steven Owens** - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
 > Computational Bioengineering Laboratory, Ocean Shores, Washington, USA  
 > **Dedicated to Richard**
 
@@ -19,11 +19,11 @@
 
 ## 🧠 Revolutionary Approach to Parkinson's Disease
 
-SynapShield is a bioengineered hydrogel system designed to **intercept Parkinson's disease at its origin** — before it reaches the brain. By targeting the gut-brain axis 15-20 years before motor symptoms appear, we can prevent the neurodegenerative cascade entirely.
+SynapShield is a bioengineered hydrogel system designed to **intercept Parkinson's disease at its origin** - before it reaches the brain. By targeting the gut-brain axis 15-20 years before motor symptoms appear, we can prevent the neurodegenerative cascade entirely.
 
-**Preprint:** Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface.* medRxiv — submitted, DOI: 10.1101/TBD
+**Preprint:** Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface.* medRxiv - submitted, DOI: 10.1101/TBD
 
-**Cite:** see [`CITATION.cff`](CITATION.cff) • [`codemeta.json`](codemeta.json) • [`AUTHORS.md`](AUTHORS.md)
+**Cite:** see [`CITATION.cff`](CITATION.cff) * [`codemeta.json`](codemeta.json) * [`AUTHORS.md`](AUTHORS.md)
 
 ---
 
@@ -86,7 +86,7 @@ Reference: Kim et al., Nature Neuroscience, 2019. doi:10.1038/s41593-019-0449-7
 
 **Math:**
 ```
-τ = τ₀ + K·γ̇ⁿ
+τ = τ₀ + K*γ̇ⁿ
 ```
 Where `n < 1` for shear-thinning behavior
 
@@ -97,7 +97,7 @@ Where `n < 1` for shear-thinning behavior
 
 **Math:**
 ```
-∂Cfree/∂t = Dgel·∇²Cfree + kcleave·Cbound - (Vmax·Cfree)/(Km + Cfree)
+∂Cfree/∂t = Dgel*∇^2Cfree + kcleave*Cbound - (Vmax*Cfree)/(Km + Cfree)
 ```
 
 ### 3. Alpha-Synuclein Trap
@@ -107,14 +107,14 @@ Where `n < 1` for shear-thinning behavior
 
 **Math:**
 ```
-d[α-syn]/dt = -(Vmax·[α-syn])/(Km + [α-syn])
+d[alpha--syn]/dt = -(Vmax*[alpha--syn])/(Km + [alpha--syn])
 ```
 
 **Full 4-species PDE:**
 ```
-∂C₄/∂t = D₄·∇²C₄ - (Vmax·C₄)/(Km + C₄) - kclear·(C₁ + C₂)·C₄
+∂C₄/∂t = D₄*∇^2C₄ - (Vmax*C₄)/(Km + C₄) - kclear*(C₁ + C₂)*C₄
 ```
-Where C₄ = α-synuclein (the pathogen)
+Where C₄ = alpha--synuclein (the pathogen)
 
 ---
 
@@ -132,7 +132,7 @@ Where C₄ = α-synuclein (the pathogen)
 ✅ Alpha-synuclein concentration reduced by **94%** at vagal boundary (7 days), **>99.99%** at 1 year  
 ✅ Zero systemic toxicity (localized micro-dosing)
 
-**Validation criterion:** `C₄(x=Lgel) < 0.01 × C₄,initial` → **✓ PASSED**
+**Validation criterion:** `C₄(x=Lgel) < 0.01 x C₄,initial` → **✓ PASSED**
 
 ---
 
@@ -144,7 +144,7 @@ Features:
 - Split-screen interface (Simulation + PDEs)
 - Real-time neural network visualization
 - Adjustable parameters (diffusion coefficients, degradation rates)
-- Interactive calculator – try the math yourself
+- Interactive calculator - try the math yourself
 - "Hope, not just science" messaging
 - ORCID / medRxiv integrated author metadata
 
@@ -166,7 +166,7 @@ synapshield/
 ├── RICHARD_HANDOUT.html
 ├── DEPLOYMENT_GUIDE.md
 ├── docs/
-│   ├── CLINICAL_BRIEFING.md    # For clinicians — CPT 43256, DTI-ALPS
+│   ├── CLINICAL_BRIEFING.md    # For clinicians - CPT 43256, DTI-ALPS
 │   └── math-models.md          # PDE derivations
 ├── simulations/
 │   ├── python/
@@ -230,9 +230,9 @@ Edit `simulations/python/synapshield_pde_solver.py`:
 
 ## 📖 Preprint / How to Cite
 
-**medRxiv — submitted June 30, 2026**
+**medRxiv - submitted June 30, 2026**
 
-> Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface — A Bioengineered Hydrogel Approach with Computational Validation.* medRxiv. doi:10.1101/TBD
+> Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface - A Bioengineered Hydrogel Approach with Computational Validation.* medRxiv. doi:10.1101/TBD
 
 ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
 
@@ -259,7 +259,7 @@ See [`CITATION.cff`](CITATION.cff) for machine-readable citation.
 
 This project is dedicated to **Richard**, whose courage in the face of Parkinson's inspired this work.
 
-From PDEs to your tablet — we're intercepting Parkinson's together.
+From PDEs to your tablet - we're intercepting Parkinson's together.
 
 *Ocean Shores, Washington*
 
@@ -267,7 +267,7 @@ From PDEs to your tablet — we're intercepting Parkinson's together.
 
 ## 📜 License
 
-MIT License — © 2026 Steven Owens — ORCID 0009-0006-0211-4812
+MIT License - © 2026 Steven Owens - ORCID 0009-0006-0211-4812
 
 Open-source because curing neurodegenerative disease is a human right, not a privilege.
 
@@ -291,11 +291,11 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## 📧 Contact
 
-- **Author:** Steven Owens — ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
+- **Author:** Steven Owens - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
 - **GitHub:** [@artistso](https://github.com/artistso)
 - **Repository:** [artistso/synapshield](https://github.com/artistso/synapshield)
 - **Live Demo:** https://artistso.github.io/synapshield/
-- **Preprint:** medRxiv — 10.1101/TBD (pending)
+- **Preprint:** medRxiv - 10.1101/TBD (pending)
 - **Email:** artistso@github.com
 
 ---
@@ -306,7 +306,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - UK Biobank
 - Bionics Institute (vagus nerve stimulation research)
 - FEniCSx Project
-- Ocean Shores community — 127+ supporters
+- Ocean Shores community - 127+ supporters
 - Every researcher fighting neurodegeneration
 
 ---
@@ -318,7 +318,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 | **Author** | Steven Owens |
 | **ORCID** | 0009-0006-0211-4812 |
 | **Affiliation** | Computational Bioengineering Laboratory, Ocean Shores, WA, USA |
-| **Preprint** | medRxiv — submitted 2026-06-30 |
+| **Preprint** | medRxiv - submitted 2026-06-30 |
 | **DOI** | 10.1101/TBD (pending) |
 | **Version** | v1.0.1 |
 | **License** | MIT |
@@ -332,4 +332,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 *"From the mind to the machine to the world."*  
 *"Hope, not just science."*
 
-**Dedicated to Richard — Ocean Shores, Washington**
+**Dedicated to Richard - Ocean Shores, Washington**

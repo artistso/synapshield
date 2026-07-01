@@ -1,17 +1,17 @@
-# Ethics Statement — SynapShield
+# Ethics Statement - SynapShield
 ## medRxiv / bioRxiv compliant
 
 **Study:** SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface  
-**Author:** Steven Owens — ORCID: 0009-0006-0211-4812  
+**Author:** Steven Owens - ORCID: 0009-0006-0211-4812  
 **Date:** June 30, 2026  
-**Preprint:** medRxiv — 10.1101/TBD  
+**Preprint:** medRxiv - 10.1101/TBD  
 **Version:** v1.0.2
 
 ---
 
 ## IRB / Ethics Oversight Statement
 
-**For medRxiv submission — exact required format:**
+**For medRxiv submission - exact required format:**
 
 > Ethics committee/IRB of **WCG IRB** gave **ethical** waiver for this work.
 
@@ -37,21 +37,21 @@ Specifically:
    - No surveys, no interviews, no clinical protocols initiated
 
 2. **Datasets referenced (not directly analyzed in this preprint)**
-   - PPMI (Parkinson's Progression Markers Initiative) — cited as background context only — https://www.ppmi-info.org/
+   - PPMI (Parkinson's Progression Markers Initiative) - cited as background context only - https://www.ppmi-info.org/
      - No individual-level PPMI data analyzed in the computational model presented
      - Model parameters derived from published literature (Braak 2003, Kim 2019)
-   - UK Biobank — cited as supporting epidemiological context (NSAID 20-30% risk reduction) — no individual-level data accessed
+   - UK Biobank - cited as supporting epidemiological context (NSAID 20-30% risk reduction) - no individual-level data accessed
    - All computational parameters are published, open-source, and reproducible
 
 3. **Computational model transparency**
    - Full source code: https://github.com/artistso/synapshield
-   - MIT License — open-source
-   - 4-species PDE: C₁ caffeine, C₂ ibuprofen, C₃ bound reservoir, C₄ α-synuclein
+   - MIT License - open-source
+   - 4-species PDE: C₁ caffeine, C₂ ibuprofen, C₃ bound reservoir, C₄ alpha--synuclein
    - Validation: >94% reduction at 7 days, >99.99% at 1 year
    - Runtime ~18 sec, fully reproducible
 
 4. **No risk to participants**
-   - Zero human subject risk — computational only
+   - Zero human subject risk - computational only
    - No personal identifiers
    - No biospecimens
    - No electronic health records accessed
@@ -63,20 +63,20 @@ Specifically:
 **Ethics approval:**
 > Ethics committee/IRB of WCG IRB gave ethical waiver for this work.
 
-**Informed consent:** Not applicable — computational modeling only — no human subjects.
+**Informed consent:** Not applicable - computational modeling only - no human subjects.
 
 **Competing interests:** None declared. Open-source MIT License. Self-funded. No commercial funding. Author Steven Owens declares no financial conflicts. ORCID: 0009-0006-0211-4812
 
 **Funding:** Self-funded / community open-source. No grant numbers. No commercial sponsor.
 
-**Data availability:** All code and data are open-source at https://github.com/artistso/synapshield — MIT License.
+**Data availability:** All code and data are open-source at https://github.com/artistso/synapshield - MIT License.
 
-**Code availability:** https://github.com/artistso/synapshield/tree/main/simulations — MIT License — DOI: 10.5281/zenodo.TBD
+**Code availability:** https://github.com/artistso/synapshield/tree/main/simulations - MIT License - DOI: 10.5281/zenodo.TBD
 
-**Patient and public involvement:** Dedicated to Richard, Ocean Shores, WA — patient partner and inspiration — community-advocacy involved throughout.
+**Patient and public involvement:** Dedicated to Richard, Ocean Shores, WA - patient partner and inspiration - community-advocacy involved throughout.
 
 **Author contributions (CRediT):**
-Steven Owens — Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing – Original Draft, Writing – Review & Editing, Visualization, Project Administration — ORCID: 0009-0006-0211-4812
+Steven Owens - Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Project Administration - ORCID: 0009-0006-0211-4812
 
 ---
 
@@ -89,7 +89,7 @@ Steven Owens — Conceptualization, Methodology, Software, Validation, Formal An
 - Puyallup, WA 98374, USA
 - Phone: +1-360-252-2500
 - www.wcgirb.com
-- Waiver scope: Computational modeling — SynapShield Parkinson's interception PDE validation — no human subjects
+- Waiver scope: Computational modeling - SynapShield Parkinson's interception PDE validation - no human subjects
 
 **Secondary (if required):**
 - **Advarra IRB**
@@ -108,13 +108,13 @@ Steven Owens — Conceptualization, Methodology, Software, Validation, Formal An
 
 ## Statements for manuscript insertion
 
-**For Abstract / Methods — medRxiv required exact phrasing:**
+**For Abstract / Methods - medRxiv required exact phrasing:**
 
 > *Ethics committee/IRB of WCG IRB gave ethical waiver for this work.*
 
 **Full Methods section insertion:**
 
-> *This study presents computational modeling only. No human subjects were involved, no personal health data were accessed, and no interventions were performed. All model parameters were derived from published literature. Referenced epidemiological datasets (PPMI, UK Biobank) were cited as background context only; no individual-level data were analyzed in the computational model presented. Ethics committee/IRB of WCG IRB gave ethical waiver for this work. The study protocol complies with the Declaration of Helsinki (computational research exemption). All code is open-source under MIT License at https://github.com/artistso/synapshield. Author: Steven Owens — ORCID: 0009-0006-0211-4812.*
+> *This study presents computational modeling only. No human subjects were involved, no personal health data were accessed, and no interventions were performed. All model parameters were derived from published literature. Referenced epidemiological datasets (PPMI, UK Biobank) were cited as background context only; no individual-level data were analyzed in the computational model presented. Ethics committee/IRB of WCG IRB gave ethical waiver for this work. The study protocol complies with the Declaration of Helsinki (computational research exemption). All code is open-source under MIT License at https://github.com/artistso/synapshield. Author: Steven Owens - ORCID: 0009-0006-0211-4812.*
 
 **Competing interests statement (medRxiv):**
 
@@ -125,7 +125,7 @@ Steven Owens — Conceptualization, Methodology, Software, Validation, Formal An
 ## Preprint servers
 
 - **medRxiv:** Ethics committee/IRB of WCG IRB gave ethical waiver for this work.
-- **bioRxiv:** Ethics committee/IRB of WCG IRB gave ethical waiver for this work. — Computational study — no human subjects — open-source validation.
+- **bioRxiv:** Ethics committee/IRB of WCG IRB gave ethical waiver for this work. - Computational study - no human subjects - open-source validation.
 
 **Citation:**
 Owens, S. (2026). SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface. *medRxiv*. doi:10.1101/TBD  
@@ -133,6 +133,6 @@ ORCID: 0009-0006-0211-4812
 
 ---
 
-*“Hope, not just science.”*  
-*Dedicated to Richard — Ocean Shores, Washington*  
-*SynapShield Research Consortium — v1.0.2 — June 30, 2026*
+*"Hope, not just science."*  
+*Dedicated to Richard - Ocean Shores, Washington*  
+*SynapShield Research Consortium - v1.0.2 - June 30, 2026*

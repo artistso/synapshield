@@ -18,7 +18,7 @@ identifiers:
     description: Live interactive demo
   - type: doi
     value: 10.1101/TBD
-    description: medRxiv preprint – under review, DOI pending
+    description: medRxiv preprint - under review, DOI pending
 version: 1.0.0
 date-released: "2026-06-30"
 license: MIT
@@ -26,13 +26,13 @@ repository-code: https://github.com/artistso/synapshield
 url: https://artistso.github.io/synapshield/
 abstract: >-
   SynapShield is a bioengineered hydrogel system designed to intercept
-  Parkinson's disease at its gut-brain origin — 15–20 years before motor
+  Parkinson's disease at its gut-brain origin - 15-20 years before motor
   symptoms appear. By targeting the pyloric/duodenal boundary where
   enteroendocrine cells interface with the vagus nerve, SynapShield acts as a
-  pathological sink, trapping misfolded α-synuclein proteins and releasing
+  pathological sink, trapping misfolded alpha--synuclein proteins and releasing
   neuroprotective agents (caffeine, chlorogenic acid, ibuprofen) over a
-  10–15 year zero-order release timeline. Computational validation using a
-  4-species PDE solver confirms >94% reduction in α-synuclein concentration
+  10-15 year zero-order release timeline. Computational validation using a
+  4-species PDE solver confirms >94% reduction in alpha--synuclein concentration
   at the vagal nerve boundary.
 keywords:
   - Parkinson's disease
@@ -55,7 +55,7 @@ preferred-citation:
       given-names: Steven
       orcid: https://orcid.org/0009-0006-0211-4812
       affiliation: Computational Bioengineering Laboratory, Ocean Shores, Washington, USA
-  title: "SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface — A Bioengineered Hydrogel Approach with Computational Validation"
+  title: "SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface - A Bioengineered Hydrogel Approach with Computational Validation"
   journal: medRxiv
   year: 2026
   month: 6
@@ -63,7 +63,7 @@ preferred-citation:
   url: https://www.medrxiv.org/
   type: article
   status: submitted
-  notes: "Preprint under review at medRxiv – June 30, 2026. Dedicated to Richard."
+  notes: "Preprint under review at medRxiv - June 30, 2026. Dedicated to Richard."
   abstract: >-
     Parkinson's disease is traditionally diagnosed 15-20 years after the
     neurodegenerative cascade begins. We present SynapShield: a bioengineered
@@ -84,7 +84,7 @@ references:
     authors:
       - family-names: Kim
         given-names: S.
-    title: "Transneuronal propagation of α-synuclein from the gut to the brain"
+    title: "Transneuronal propagation of alpha--synuclein from the gut to the brain"
     journal: Nature Neuroscience
     year: 2019
     volume: 22

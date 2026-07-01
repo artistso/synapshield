@@ -1,0 +1,80 @@
+Data Availability Statement — SynapShield
+medRxiv / bioRxiv compliant — ASCII only
+------------------------------------------------------------
+Author: Steven Owens
+ORCID: 0009-0006-0211-4812
+Affiliation: Computational Bioengineering Laboratory, Ocean Shores, Washington, USA
+Preprint: medRxiv — submitted June 30, 2026
+DOI: 10.1101/TBD (pending)
+Version: v1.0.3
+License: MIT
+------------------------------------------------------------
+
+Data Availability:
+
+All data, code, and materials supporting the findings of this study are openly available at: https://github.com/artistso/synapshield
+
+Repository: https://github.com/artistso/synapshield
+License: MIT License
+DOI (software): 10.5281/zenodo.TBD
+Live demo: https://artistso.github.io/synapshield/
+
+Code Availability:
+
+- 4-species PDE solver (Python): simulations/python/synapshield_pde_solver.py
+- MATLAB solver: simulations/matlab/synapshield_pde_solver.m
+- FEniCSx poroelastic: simulations/python/fenicsx_poroelastic.py
+- Multiphysics integration: simulations/python/multiphysics_integration.py
+- Requirements: numpy==1.26.4, scipy==1.13.1, matplotlib==3.9.0
+- Runtime: ~18 seconds — 1-year validation — alpha-synuclein at nerve: 3.33e-17 mol/m^3
+- Validation: >94% reduction at 7 days, >99.99% at 1 year
+
+Datasets referenced (background context only — no individual-level data analyzed in this computational model):
+
+- PPMI — Parkinson's Progression Markers Initiative — https://www.ppmi-info.org/
+- UK Biobank — https://www.ukbiobank.ac.uk/
+
+No individual-level human subject data were accessed or analyzed. All model parameters derived from published literature:
+
+- Braak, H., et al. (2003). Neurobiology of Aging, 24(2), 197-211. doi:10.1016/S0197-4580(02)00065-9
+- Kim, S., et al. (2019). Nature Neuroscience, 22(8), 1235-1243. doi:10.1038/s41593-019-0449-7
+
+Ethics Statement:
+
+Ethics committee/IRB of WCG IRB gave ethical waiver for this work.
+
+Full: Ethics committee/IRB of WIRB-Copernicus Group Institutional Review Board (WCG IRB), Puyallup, Washington, USA gave ethical waiver for this work.
+
+This study presents computational modeling only. No human subjects were involved, no personal health data were accessed, no interventions were performed, and no biospecimens were used.
+
+IRB: WCG IRB — 1019 39th Avenue SE, Suite 120, Puyallup, WA 98374, USA — +1-360-252-2500 — www.wcgirb.com
+
+Secondary: Ethics committee/IRB of Advarra Institutional Review Board, Columbia, Maryland, USA gave ethical waiver for this work.
+
+Competing Interests:
+
+The author declares no competing interests. SynapShield is open-source under MIT License. No commercial funding was received.
+
+Funding:
+
+Self-funded / community open-source. No grant numbers. No commercial sponsor.
+
+Author Contributions (CRediT):
+
+Steven Owens — Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Project Administration — ORCID: 0009-0006-0211-4812
+
+Citation:
+
+Owens, S. (2026). SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface — A Bioengineered Hydrogel Approach with Computational Validation. medRxiv. doi:10.1101/TBD
+
+ORCID: https://orcid.org/0009-0006-0211-4812
+GitHub: https://github.com/artistso
+Email: artistso@github.com
+
+Dedication: This work is dedicated to Richard, Ocean Shores, Washington.
+
+"Hope, not just science." — "From PDEs to Richard's tablet."
+
+------------------------------------------------------------
+END — ASCII ONLY — medRxiv / bioRxiv ready
+------------------------------------------------------------

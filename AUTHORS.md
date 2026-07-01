@@ -9,7 +9,7 @@ ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
 GitHub: [@artistso](https://github.com/artistso)  
 Email: artistso@github.com  
 
-**Roles (CRediT):** Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing – Original Draft, Writing – Review & Editing, Visualization, Project Administration
+**Roles (CRediT):** Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Project Administration
 
 ---
 
@@ -61,7 +61,7 @@ Email: artistso@github.com
 - PPMI Database (Parkinson's Progression Markers Initiative)
 - UK Biobank
 - Bionics Institute (vagus nerve stimulation research)
-- Ocean Shores community – 127+ supporters
+- Ocean Shores community - 127+ supporters
 - FEniCSx Project
 - Every researcher fighting neurodegeneration
 
@@ -87,7 +87,7 @@ Preprint: medRxiv (pending DOI)
 
 **APA (7th):**
 
-Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface — A Bioengineered Hydrogel Approach with Computational Validation*. medRxiv. https://doi.org/10.1101/TBD
+Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface - A Bioengineered Hydrogel Approach with Computational Validation*. medRxiv. https://doi.org/10.1101/TBD
 
 **MLA:**
 
@@ -122,4 +122,4 @@ Owens, Steven. "SynapShield: Intercepting Parkinson's Disease at the Gut-Brain I
 
 ---
 
-*"Hope, not just science." — From PDEs to Richard's tablet.*
+*"Hope, not just science." - From PDEs to Richard's tablet.*

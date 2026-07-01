@@ -1,12 +1,12 @@
 # Contributing to SynapShield
 
-Thank you for your interest in SynapShield — intercepting Parkinson's disease at the gut-bbrain axis.
+Thank you for your interest in SynapShield - intercepting Parkinson's disease at the gut-bbrain axis.
 
-**Author:** Steven Owens — ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
-**Preprint:** medRxiv — 10.1101/TBD (submitted June 30, 2026)  
+**Author:** Steven Owens - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
+**Preprint:** medRxiv - 10.1101/TBD (submitted June 30, 2026)  
 **License:** MIT
 
-> "Hope, not just science." — Dedicated to Richard, Ocean Shores, WA
+> "Hope, not just science." - Dedicated to Richard, Ocean Shores, WA
 
 ---
 
@@ -19,9 +19,9 @@ Thank you for your interest in SynapShield — intercepting Parkinson's disease 
 - Submit PR with benchmark results
 
 ### 2. Clinicians
-- Review `docs/CLINICAL_BRIEFING.md` — CPT 43256
+- Review `docs/CLINICAL_BRIEFING.md` - CPT 43256
 - Suggest inclusion/exclusion criteria refinements
-- Contact: artistso@github.com — ORCID 0009-0006-0211-4812
+- Contact: artistso@github.com - ORCID 0009-0006-0211-4812
 
 ### 3. Bioengineers
 - Hydrogel formulation improvements welcome
@@ -46,7 +46,7 @@ python simulations/python/synapshield_pde_solver.py
 ```
 
 **Code style:** Black, PEP8, numpy docstrings  
-**Tests:** pytest — add to `tests/`  
+**Tests:** pytest - add to `tests/`  
 **Commits:** Conventional Commits
 
 ---
@@ -65,8 +65,8 @@ See `CITATION.cff`.
 ## Code of Conduct
 
 - Respectful, inclusive, patient-first
-- No medical advice — research use only until FDA approval
-- Open-source forever — MIT License
+- No medical advice - research use only until FDA approval
+- Open-source forever - MIT License
 
 ---
 
