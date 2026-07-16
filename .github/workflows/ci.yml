@@ -24,7 +24,12 @@ jobs:
       - run: python -m pip install -e '.[test]'
       - run: pytest
       - run: python simulations/python/synapshield_model_v2.py --duration-days 1 --grid-points 41 --output model-report.json
+      - run: python tools/static_claim_audit.py --root . --output audit/static-claim-report.json --fail-on-findings
+      - run: python tools/hf_model_audit.py --root . --numerical-report model-report.json --output audit/model-panel-packet.json --dry-run
       - uses: actions/upload-artifact@v4
         with:
-          name: model-report-py${{ matrix.python-version }}
-          path: model-report.json
+          name: audit-reports-py${{ matrix.python-version }}
+          path: |
+            model-report.json
+            audit/static-claim-report.json
+            audit/model-panel-packet.json
