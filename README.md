@@ -1,335 +1,139 @@
-# SynapShield: Parkinson's Interception Technology
+# SynapShield
 
-[![medRxiv](https://img.shields.io/badge/medRxiv-submitted-yellow.svg)](https://www.medrxiv.org/)
-[![DOI](https://img.shields.io/badge/DOI-10.1101%2FTBD_(pending)-blue.svg)](https://doi.org/10.1101/TBD)
-[![ORCID](https://img.shields.io/badge/ORCID-0009--0006--0211--4812-a6ce39.svg)](https://orcid.org/0009-0006-0211-4812)
+## Exploratory reaction–diffusion model for a hypothetical local α-synuclein sink
+
+[![CI](https://github.com/artistso/synapshield/actions/workflows/ci.yml/badge.svg)](https://github.com/artistso/synapshield/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://artistso.github.io/synapshield/)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](requirements.txt)
-[![version](https://img.shields.io/badge/version-v1.0.1-blue.svg)](https://github.com/artistso/synapshield/releases/tag/v1.0.0)
+[![Research status](https://img.shields.io/badge/status-computational%20hypothesis-orange.svg)](#research-status)
 
-> **Intercepting Parkinson's disease 15 years before it starts - at the gut-brain axis.**
->
-> medRxiv preprint - submitted June 30, 2026 - DOI pending  
-> **Steven Owens** - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
-> Computational Bioengineering Laboratory, Ocean Shores, Washington, USA  
-> **Dedicated to Richard**
+> **Research-only repository.** SynapShield is not a medical device, drug, diagnostic, preventive treatment, clinical protocol, or evidence that Parkinson’s disease can be stopped by an implanted hydrogel.
 
----
+SynapShield now has a narrower, falsifiable purpose: test whether a hypothetical localized sink can reduce a modeled concentration field under explicit one-dimensional transport assumptions. The repository separates mathematical behavior from biological, engineering, regulatory, and clinical claims.
 
-## 🧠 Revolutionary Approach to Parkinson's Disease
+## Research status
 
-SynapShield is a bioengineered hydrogel system designed to **intercept Parkinson's disease at its origin** - before it reaches the brain. By targeting the gut-brain axis 15-20 years before motor symptoms appear, we can prevent the neurodegenerative cascade entirely.
+| Question | Current status |
+|---|---|
+| Does the numerical solver run reproducibly? | Yes; automated tests cover positivity, boundary conditions, controls, and release arithmetic. |
+| Does a sink reduce concentration in the synthetic model? | Under some parameter sets, yes. The magnitude is strongly parameter-dependent. |
+| Is the model calibrated to measured α-synuclein transport or binding data? | No. |
+| Has the material been synthesized or characterized? | No evidence is included here. |
+| Has safety, residence time, dosing, toxicity, or mechanical durability been demonstrated? | No. |
+| Does this prevent, slow, or treat Parkinson’s disease? | Unknown; this repository provides no clinical evidence. |
+| Is there a verified public preprint DOI or IRB determination? | Not currently documented in this repository. |
 
-**Preprint:** Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface.* medRxiv - submitted, DOI: 10.1101/TBD
+## Important correction
 
-**Cite:** see [`CITATION.cff`](CITATION.cff) * [`codemeta.json`](codemeta.json) * [`AUTHORS.md`](AUTHORS.md)
+Earlier versions incorrectly attributed Parkinson’s disease, symptoms, and quotations to Richard and his wife. Those statements were false and have been retracted. Neither person should be represented as a patient, study participant, testimonial source, or clinical motivation. See [`RICHARD_HANDOUT.html`](RICHARD_HANDOUT.html) for the correction notice.
 
----
+## What changed in v0.2
 
-## 🎯 The Core Innovation
+The repository was stress-tested against its own equations and code.
 
-### Traditional Approach (Reactive)
-- Wait for tremors to appear
-- 60-80% of substantia nigra neurons already dead
-- Treat with oral Levodopa (limited effectiveness)
+1. **Release kinetics contradicted the 10–15 year claim.** The previous combined first-order rate was `1.6e-5 s^-1`, which has a half-life of about **12.0 hours** and leaves about **7.3e-220** of the reservoir after one year.
+2. **The previous baseline was missing.** A sink model cannot establish effect without an identical no-sink control.
+3. **The previous output was labeled “proof” despite synthetic parameters.** Outputs are now explicitly labeled model-dependent and non-clinical.
+4. **The previous multiphysics code contained execution and formulation defects.** It used test functions before defining them, instantiated the nonlinear problem before adding traction, simulated seconds while claiming years or hundreds of millions of cycles, and lacked empirical calibration.
+5. **The public site contained fabricated health claims, quotations, activity counts, and guaranteed outcomes.** These have been removed.
 
-### SynapShield Approach (Interceptive)
-- Target the **pyloric/duodenal boundary** where toxicity enters
-- Inject a "smart jelly" that lasts 10-15 years
-- Block alpha-synuclein before it travels up the vagus nerve
+## Model v2
 
----
+The conservative model solves
 
-## 👤 Author
-
-**Steven Owens**  
-Computational Bioengineering Laboratory  
-Ocean Shores, Washington, USA  
-
-- ORCID: https://orcid.org/0009-0006-0211-4812
-- GitHub: https://github.com/artistso
-- Email: artistso@github.com
-- medRxiv: submitted June 30, 2026
-
-CRediT: Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Writing
-
----
-
-## 🔬 Scientific Foundation
-
-### The Parkinson's Timeline (20+ Years)
-```
-Year -20: Gut dysbiosis, vagal inflammation begin
-Year -15: Alpha-synuclein misfolding in enteroendocrine cells
-Year -10: Toxic proteins climb vagus nerve to brainstem
-Year -5:  Microglial "friendly fire" destroys dopamine neurons
-Year 0:   Motor symptoms (tremors) finally appear
+```text
+∂C/∂t = ∂/∂x(D(x) ∂C/∂x) - I_sink(x) Vmax C/(Km + C)
 ```
 
-### The Vagus Nerve Highway
-The vagus nerve is the **longest cranial nerve** in the body, connecting the gut to the brainstem. In Parkinson's, misfolded alpha-synuclein proteins use this nerve as a "ladder" to reach the brain.
+with:
 
-**SynapShield severs this highway at the source.**
+- zero flux at `x = 0`;
+- fixed source concentration at `x = L`;
+- harmonic-mean face diffusivity across material interfaces;
+- a matched no-sink control;
+- non-negativity and finite-value checks;
+- optional uncertainty propagation over broad synthetic parameter ranges.
 
-Reference: Braak et al., Neurobiology of Aging, 2003. doi:10.1016/S0197-4580(02)00065-9  
-Reference: Kim et al., Nature Neuroscience, 2019. doi:10.1038/s41593-019-0449-7
+The model does **not** map concentration reduction to disease risk, neuron survival, clinical progression, or treatment efficacy.
 
----
+## Run
 
-## 🧪 The Technology
-
-### 1. Shear-Thinning Hydrogel
-- **Injection**: Liquid under pressure (easy endoscopic delivery)
-- **Gelation**: Instantly solidifies in tissue
-- **Mechanics**: Herschel-Bulkley fluid model
-
-**Math:**
-```
-τ = τ₀ + K*γ̇ⁿ
-```
-Where `n < 1` for shear-thinning behavior
-
-### 2. Dual-Drug Delivery System
-- **Ibuprofen**: Reduces neuroinflammation (20-30% Parkinson's risk reduction in datasets)
-- **Caffeine + Chlorogenic Acid**: Antioxidants that prevent alpha-synuclein misfolding
-- **Release Profile**: Zero-order kinetics over 10-15 years
-
-**Math:**
-```
-∂Cfree/∂t = Dgel*∇^2Cfree + kcleave*Cbound - (Vmax*Cfree)/(Km + Cfree)
-```
-
-### 3. Alpha-Synuclein Trap
-- **β-Cyclodextrin cages** embedded in hydrogel
-- **Michaelis-Menten kinetics** trap toxic proteins
-- **Prevents prion-like spreading** up the vagus nerve
-
-**Math:**
-```
-d[alpha--syn]/dt = -(Vmax*[alpha--syn])/(Km + [alpha--syn])
-```
-
-**Full 4-species PDE:**
-```
-∂C₄/∂t = D₄*∇^2C₄ - (Vmax*C₄)/(Km + C₄) - kclear*(C₁ + C₂)*C₄
-```
-Where C₄ = alpha--synuclein (the pathogen)
-
----
-
-## 📊 Validation & Results
-
-### Computational Models
-- **Python finite element analysis** (see `/simulations/python/`)
-- **MATLAB PDE solvers** (see `/simulations/matlab/`)
-- **FEniCSx poroelastic multiphysics** (see `/simulations/python/fenicsx_poroelastic.py`)
-- **4-species model**: Caffeine, Ibuprofen, Bound Drug, Alpha-Synuclein
-
-### Key Findings
-✅ Hydrogel localizes within 0.5mm of injection site  
-✅ Drug release sustained over 15-year simulated timeline  
-✅ Alpha-synuclein concentration reduced by **94%** at vagal boundary (7 days), **>99.99%** at 1 year  
-✅ Zero systemic toxicity (localized micro-dosing)
-
-**Validation criterion:** `C₄(x=Lgel) < 0.01 x C₄,initial` → **✓ PASSED**
-
----
-
-## 🌐 Live Demo
-
-**Interactive Web Application**: https://artistso.github.io/synapshield/
-
-Features:
-- Split-screen interface (Simulation + PDEs)
-- Real-time neural network visualization
-- Adjustable parameters (diffusion coefficients, degradation rates)
-- Interactive calculator - try the math yourself
-- "Hope, not just science" messaging
-- ORCID / medRxiv integrated author metadata
-
----
-
-## 📂 Repository Structure
-
-```
-synapshield/
-├── index.html                    # Interactive web application
-├── README.md                     # This file
-├── LICENSE                       # MIT License
-├── CITATION.cff                  # Machine-readable citation
-├── codemeta.json                 # CodeMeta metadata
-├── .zenodo.json                  # Zenodo archival metadata
-├── AUTHORS.md                    # Author / ORCID / affiliation
-├── TECHNICAL_PAPER.md          # Publication-ready paper (medRxiv)
-├── TECHNICAL_TRANSCRIPT.md
-├── RICHARD_HANDOUT.html
-├── DEPLOYMENT_GUIDE.md
-├── docs/
-│   ├── CLINICAL_BRIEFING.md    # For clinicians - CPT 43256, DTI-ALPS
-│   └── math-models.md          # PDE derivations
-├── simulations/
-│   ├── python/
-│   │   ├── synapshield_pde_solver.py  # 4-species PDE solver
-│   │   ├── fenicsx_poroelastic.py
-│   │   └── multiphysics_integration.py
-│   ├── matlab/
-│   │   └── synapshield_pde_solver.m
-│   └── results/
-└── data/                       # PPMI, UK Biobank ready
-```
-
----
-
-## 💊 The "Hope, Not Science" Philosophy
-
-Behind every equation is a person. Behind every simulation is a patient waiting for a cure.
-
-> **"This is about hope, not just science."**
-
-SynapShield isn't just a hydrogel. It's a promise that we can intercept neurodegenerative disease before it steals someone's future.
-
----
-
-## 🚀 Getting Started
-
-### View the Live Application
-1. Visit: https://artistso.github.io/synapshield/
-2. Click "Start Simulation"
-3. Watch the neural network pulse in real-time
-4. Read the PDEs on the right panel
-5. Try the Interactive Calculator
-
-### Run the Simulations
 ```bash
-# Clone the repository
 git clone https://github.com/artistso/synapshield.git
 cd synapshield
-
-# Create virtual environment (recommended)
 python -m venv .venv
 source .venv/bin/activate
-
-# Install pinned dependencies
-pip install -r requirements.txt
-# numpy==1.26.4 scipy==1.13.1 matplotlib==3.9.0
-
-# Run the 4-species PDE solver
-cd simulations/python
-python synapshield_pde_solver.py
-# ~2-4 min runtime, outputs synapshield_results.png
+python -m pip install -e '.[test]'
+pytest
+python simulations/python/synapshield_model_v2.py \
+  --duration-days 1 \
+  --grid-points 41 \
+  --uncertainty-samples 100 \
+  --output model-report.json
 ```
 
-### Modify the Parameters
-Edit `simulations/python/synapshield_pde_solver.py`:
-- Diffusion coefficients (`D_gel`, `D_tissue`)
-- Degradation rates (`k_cleave`)
-- Gel thickness (`L_gel`)
+Legacy command compatibility is retained:
 
----
-
-## 📖 Preprint / How to Cite
-
-**medRxiv - submitted June 30, 2026**
-
-> Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface - A Bioengineered Hydrogel Approach with Computational Validation.* medRxiv. doi:10.1101/TBD
-
-ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
-
-**BibTeX:**
-```bibtex
-@article{owens2026synapshield,
-  author  = {Owens, Steven},
-  title   = {SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface},
-  journal = {medRxiv},
-  year    = {2026},
-  month   = jun,
-  doi     = {10.1101/TBD},
-  url     = {https://github.com/artistso/synapshield},
-  orcid   = {0009-0006-0211-4812},
-  note    = {Preprint under review. Dedicated to Richard.}
-}
+```bash
+python simulations/python/synapshield_pde_solver.py
 ```
 
-See [`CITATION.cff`](CITATION.cff) for machine-readable citation.
+## Interpreting results
 
----
+A positive modeled reduction means only that the chosen sink term lowered the modeled concentration at the selected interface relative to the matched no-sink control. It does not establish:
 
-## 👥 Dedication
+- physical binding of α-synuclein;
+- selectivity for pathological species;
+- transport through real gastrointestinal tissue;
+- access to relevant enteric or vagal compartments;
+- hydrogel biocompatibility or long-term stability;
+- drug efficacy, dose, release, or safety;
+- applicability to brain-first or other Parkinson’s subtypes;
+- prevention of Parkinson’s disease.
 
-This project is dedicated to **Richard**, whose courage in the face of Parkinson's inspired this work.
+## Real-world validation gates
 
-From PDEs to your tablet - we're intercepting Parkinson's together.
+The concept should not advance to human-facing claims unless each prior gate is passed with preregistered criteria and independent replication.
 
-*Ocean Shores, Washington*
+| Gate | Minimum evidence |
+|---|---|
+| 0. Computational integrity | Unit tests, convergence analysis, mass-balance analysis, no-sink controls, parameter provenance, reproducible artifacts. |
+| 1. Molecular feasibility | Measured binding kinetics and capacity for defined α-synuclein species; selectivity and reversibility characterized. |
+| 2. Material feasibility | Rheology, swelling, degradation, sterilization, leachables, and release measured—not inferred. |
+| 3. In-vitro safety | Cytotoxicity, inflammatory response, epithelial integrity, and off-target adsorption. |
+| 4. Ex-vivo transport | Relevant tissue geometry and experimentally measured boundary conditions. |
+| 5. In-vivo feasibility | Residence, migration, local injury, systemic exposure, retrieval, and failure modes. |
+| 6. Regulatory strategy | Product classification, quality system, pre-submission interaction, manufacturing controls, and formal toxicology plan. |
+| 7. Clinical research | Approved protocol, verified ethics review, informed consent, monitoring, and statistically justified endpoints. |
 
----
+## Repository map
 
-## 📜 License
+```text
+.
+├── index.html
+├── README.md
+├── TECHNICAL_PAPER.md
+├── MODEL_LIMITATIONS.md
+├── RICHARD_HANDOUT.html
+├── pyproject.toml
+├── simulations/python/
+│   ├── synapshield_model_v2.py
+│   ├── synapshield_pde_solver.py
+│   ├── fenicsx_poroelastic.py
+│   └── multiphysics_integration.py
+├── tests/
+│   ├── test_model_v2.py
+│   └── test_mechanics_sanity.py
+└── .github/workflows/ci.yml
+```
 
-MIT License - © 2026 Steven Owens - ORCID 0009-0006-0211-4812
+## Scientific framing
 
-Open-source because curing neurodegenerative disease is a human right, not a privilege.
+The gut-first/body-first pathway is an active hypothesis and likely does not describe every Parkinson’s case. Evidence of association or animal-model propagation does not establish that a local gastrointestinal sink will prevent human disease. Caffeine and NSAID associations likewise do not justify chronic implanted delivery without pharmacology and toxicology data.
 
-See [`LICENSE`](LICENSE).
+## Citation status
 
----
+Do not cite this repository as a validated therapy or clinical study. A public preprint DOI, journal publication, ethics determination, or trial registration should be added only after a verifiable public record exists.
 
-## 🤝 Contributing
+## License
 
-We need:
-- Bioengineers (hydrogel design)
-- Computational modelers (PDE solvers)
-- Clinicians (validation studies)
-- Patients (hope and persistence)
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md)
-
-**Fork this repo. Build the future. Save brains.**
-
----
-
-## 📧 Contact
-
-- **Author:** Steven Owens - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)
-- **GitHub:** [@artistso](https://github.com/artistso)
-- **Repository:** [artistso/synapshield](https://github.com/artistso/synapshield)
-- **Live Demo:** https://artistso.github.io/synapshield/
-- **Preprint:** medRxiv - 10.1101/TBD (pending)
-- **Email:** artistso@github.com
-
----
-
-## 🌟 Acknowledgments
-
-- PPMI Database (Parkinson's Progression Markers Initiative)
-- UK Biobank
-- Bionics Institute (vagus nerve stimulation research)
-- FEniCSx Project
-- Ocean Shores community - 127+ supporters
-- Every researcher fighting neurodegeneration
-
----
-
-## 📊 Metadata
-
-| Field | Value |
-|-------|-------|
-| **Author** | Steven Owens |
-| **ORCID** | 0009-0006-0211-4812 |
-| **Affiliation** | Computational Bioengineering Laboratory, Ocean Shores, WA, USA |
-| **Preprint** | medRxiv - submitted 2026-06-30 |
-| **DOI** | 10.1101/TBD (pending) |
-| **Version** | v1.0.1 |
-| **License** | MIT |
-| **Repo** | https://github.com/artistso/synapshield |
-| **Demo** | https://artistso.github.io/synapshield/ |
-
----
-
-**Built with 💙 and way too many partial differential equations.**
-
-*"From the mind to the machine to the world."*  
-*"Hope, not just science."*
-
-**Dedicated to Richard - Ocean Shores, Washington**
+MIT. The license permits reuse of code; it does not certify medical validity, regulatory compliance, safety, or fitness for clinical use.

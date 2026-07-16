@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+model-report.json
+synapshield_stress_report.png
+*.xdmf
+*.h5

@@ -1,405 +1,138 @@
-# SynapShield: Technical Paper
+# SynapShield: a computational hypothesis and falsification plan
 
-## Intercepting Parkinson's Disease at the Gut-Brain Interface
-### A Bioengineered Hydrogel Approach with Computational Validation
-
-**Steven Owens**^1  
-^1Computational Bioengineering Laboratory, Ocean Shores, Washington, USA  
-ORCID: [https://orcid.org/0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
-Email: artistso@github.com  
-GitHub: https://github.com/artistso/synapshield
-
-**Preprint:** medRxiv - Submitted June 30, 2026  
-**DOI:** 10.1101/TBD (pending)  
-**Version:** v1.0.1  
-**License:** MIT  
+**Author:** Steven Owens  
 **Repository:** https://github.com/artistso/synapshield  
-**Live Demo:** https://artistso.github.io/synapshield/
-
-**Dedicated to:** Richard - Ocean Shores, Washington
-
----
+**Version:** 0.2  
+**Status:** exploratory computational work; not a clinical study or validated therapy
 
 ## Abstract
 
-Parkinson's disease (PD) is traditionally diagnosed 15-20 years after the neurodegenerative cascade begins, when 60-80% of substantia nigra neurons are already destroyed. We present **SynapShield**: a bioengineered hydrogel system that intercepts PD at its origin-the gut-brain axis-before it reaches the central nervous system. By targeting the pyloric/duodenal boundary where enteroendocrine cells interface with the vagus nerve, SynapShield acts as a "pathological sink," trapping misfolded alpha--synuclein proteins and releasing neuroprotective agents over a 10-15 year timeline. Computational validation using finite element PDE solvers confirms a **>94% reduction in alpha--synuclein concentration** at the vagal nerve boundary (7 days), **>99.99% at 1 year**. This work demonstrates that interceptive neurodegenerative therapeutics are not only possible but computable, scalable, and ready for clinical translation.
+This repository evaluates a narrow mathematical question: under a hypothetical one-dimensional transport model, can a localized saturable sink lower a concentration field relative to an otherwise identical no-sink control? Earlier versions overstated this result as proof of Parkinson’s disease prevention and included unsupported personal, clinical, mechanical, pharmacological, publication, and ethics claims. Version 0.2 retracts those claims, introduces an explicit control, corrects release-kinetic arithmetic, adds automated tests, and defines experimental falsification gates. The model can demonstrate internal consequences of assumptions; it cannot establish biological feasibility, safety, disease modification, or clinical benefit.
 
-**Keywords:** Parkinson's disease, gut-brain axis, vagus nerve, hydrogel, alpha--synuclein, PDE modeling, interceptive therapeutics, computational bioengineering, open-source medicine
+## 1. Research question
 
-**Preprint ID:** medRxiv 10.1101/TBD  
-**ORCID:** 0009-0006-0211-4812
+Let `C(x,t)` denote a generic α-synuclein concentration proxy in a one-dimensional domain of length `L`. The candidate model asks whether a localized sink in `0 ≤ x ≤ L_sink` lowers `C` at a selected interface compared with a matched no-sink model.
 
----
+This is not equivalent to asking whether an implanted hydrogel prevents Parkinson’s disease.
 
-## Author Information
+## 2. Governing equation
 
-**Steven Owens**  
-Computational Bioengineering Laboratory  
-Ocean Shores, Washington, USA  
-ORCID: 0009-0006-0211-4812  
-Email: artistso@github.com
+The candidate model is
 
-**Contributions (CRediT):** Conceptualization, Methodology, Software, Validation, Formal Analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Project Administration
-
-**Competing Interests:** None declared. Open-source MIT License.  
-**Funding:** Self-funded / community. No commercial funding.  
-**Data Availability:** https://github.com/artistso/synapshield  
-**Code Availability:** MIT License, https://github.com/artistso/synapshield
-
----
-
-## Ethics Statement
-
-**Ethics committee/IRB of WCG IRB gave ethical waiver for this work.**
-
-*Full statement for medRxiv / bioRxiv:*
-
-> Ethics committee/IRB of **WIRB-Copernicus Group Institutional Review Board (WCG IRB), Puyallup, Washington, USA** gave **ethical** waiver for this work.
-
-This study presents **computational modeling only**. No human subjects were involved, no personal health data were accessed, no interventions were performed, and no biospecimens were used. All model parameters were derived from published literature (Braak 2003; Kim 2019). Referenced epidemiological datasets (PPMI - https://www.ppmi-info.org/ ; UK Biobank) are cited as background context only; no individual-level data were analyzed in the computational model presented in this preprint.
-
-- **Human subjects:** None - computational in silico only
-- **Informed consent:** Not applicable
-- **IRB review:** Waiver granted - WCG IRB - computational modeling exemption - Declaration of Helsinki compliant
-- **Data sources:** Published literature only - open-source parameters
-- **Biospecimens:** None
-- **Clinical trial:** Not applicable - preclinical computational
-- **Patient involvement:** Dedicated to Richard, Ocean Shores, WA - patient partner / community advocacy - no data collection from patient
-
-**IRB contact (verification):**  
-WCG IRB - WIRB-Copernicus Group  
-1019 39th Avenue SE, Suite 120  
-Puyallup, WA 98374, USA  
-+1-360-252-2500 - www.wcgirb.com
-
-**Second IRB (bioRxiv duplicate, if required):**  
-Ethics committee/IRB of **Advarra Institutional Review Board, Columbia, Maryland, USA** gave **ethical** waiver for this work.
-
-Full ethics documentation: [`docs/ETHICS_STATEMENT.md`](docs/ETHICS_STATEMENT.md)
-
----
-
-## 1. Introduction
-
-### 1.1 The Parkinson's Timeline Problem
-
-Parkinson's disease manifests as a "stroke of time"-by the time motor symptoms (tremors, bradykinesia) appear, the neurodegenerative cascade has been ongoing for decades. The classical Braak hypothesis posits that PD pathology ascends the vagus nerve from the gut to the brainstem over 15-20 years before clinical diagnosis [1].
-
-**Traditional Approach (Reactive):**
-```
-Year -20: Gut dysbiosis, alpha--synuclein misfolding begin
-Year -15: Toxic proteins ascend vagus nerve
-Year -10: Microglial "friendly fire" in brainstem
-Year -5:  60% dopamine neurons lost
-Year 0:   Motor symptoms (tremors) appear
+```text
+∂C/∂t = ∂/∂x(D(x) ∂C/∂x) - I_sink(x) Vmax C/(Km + C).
 ```
 
-**SynapShield Approach (Interceptive):**
-```
-Year -20: Hydrogel implanted in duodenum
-Year -20: alpha--synuclein trapped at source
-Year -20: Neuroprotective drugs released locally
-Year 0:  NO motor symptoms. Parkinson's INTERCEPTED.
-```
+The control model sets `Vmax = 0` while retaining all other parameters.
 
-### 1.2 The Vagus Nerve Highway
+Boundary conditions:
 
-The vagus nerve (cranial nerve X) is the longest peripheral nerve in the body, connecting the gastrointestinal tract to the brainstem. In PD, misfolded alpha--synuclein proteins use this nerve as a "ladder," climbing from enteroendocrine cells (EECs) in the duodenum to the substantia nigra [2].
-
-**SynapShield severs this highway at the source.**
-
----
-
-## 2. Materials & Methods
-
-### 2.1 Hydrogel Design: Shear-Thinning Biomaterial
-
-The SynapShield hydrogel is a dual-network interpenetrating polymer network (IPN) designed for submucosal injection via routine endoscopy.
-
-**Network 1: Sodium Alginate (Physical Crosslinks)**
-- Rapid gelation upon injection
-- Provides initial mechanical stability
-- Shear-thinning behavior: `τ = τ₀ + K*γ̇ⁿ` (where `n < 1`)
-
-**Network 2: Hyaluronic Acid-Tyramine (Chemical Crosslinks)**
-- Covalent oxidative coupling (HRP/H₂O₂ catalyzed)
-- Storage modulus: `G' ≈ 1000-3000 Pa` (resists peristalsis)
-- Biocompatible, FDA-approved precursor
-
-**Rheology Validation:**
-```python
-# Herschel-Bulkley model for injection
-def shear_thinning_viscosity(tau, tau_0, K, n):
-    if tau < tau_0:
-        return np.inf  # Solid phase
-    else:
-        return (tau - tau_0) / (K * gamma_dot**(n-1))
+```text
+-D ∂C/∂x |x=0 = 0
+C(L,t) = C_source
 ```
 
-### 2.2 Drug Delivery System: Host-Guest Caging
+Initial condition:
 
-Three neuroprotective agents are embedded in the hydrogel via β-cyclodextrin (β-CD) inclusion complexes:
-
-| Drug | Mechanism | Release Rate |
-|------|-----------|--------------|
-| **Caffeine** | Antioxidant, prevents alpha--synuclein misfolding | `kcleave = 1.5x10⁻⁵ s⁻^1` |
-| **Chlorogenic Acid** | Polyphenol, reduces oxidative stress | `kcleave = 1.5x10⁻⁵ s⁻^1` |
-| **Ibuprofen** | NSAID, inhibits neuroinflammation (COX-2) | `kibu = 1.0x10⁻⁶ s⁻^1` (slower) |
-
-**Zero-Order Kinetics (10-15 Year Release):**
-```
-dCbound/dt = -kerosion*(Cbound)ⁿ   where n < 1 (dispersive)
+```text
+C(x,0) = 0 for x < L
+C(L,0) = C_source
 ```
 
-Target erosion: `kerosion ≈ 10⁻^1⁵ s⁻^1` (long-term); computational validation uses `kcleave = 1.5x10⁻⁵ s⁻^1` for accelerated in silico testing, scaled to 15-year zero-order via reservoir engineering.
+The spatial operator is discretized by a finite-volume method with harmonic face diffusivities. The method-of-lines system is integrated with SciPy’s BDF solver.
 
-### 2.3 Computational Model: 4-Species PDE Solver
+## 3. Primary computational estimand
 
-We developed a partial differential equation (PDE) model to simulate drug release and alpha--synuclein transport in the duodenal tissue.
-
-**Domain:** 1D tissue geometry (0 to 2 mm depth)  
-**Species:**
-- `C₁(x,t)` = Free caffeine/CGA concentration
-- `C₂(x,t)` = Free ibuprofen concentration
-- `C₃(x,t)` = Bound drug reservoir (hydrogel)
-- `C₄(x,t)` = alpha--synuclein concentration (the pathogen)
-
-**Governing Equations:**
-
-**1. Drug Diffusion (Fick's Second Law + Source):**
-```
-∂C₁/∂t = D₁*∇^2C₁ + kcleave*C₃   (caffeine)
-∂C₂/∂t = D₂*∇^2C₂ + kibu*C₃       (ibuprofen)
+```text
+relative reduction = 1 - C_candidate(x_interface,T) / C_control(x_interface,T)
 ```
 
-**2. Reservoir Depletion:**
-```
-∂C₃/∂t = -kcleave*C₃ - kibu*C₃
-```
+This ratio is a model comparison. It is not a risk ratio, treatment effect, biomarker response, or clinical endpoint.
 
-**3. alpha--Synuclein Transport + Trapping:**
-```
-∂C₄/∂t = D₄*∇^2C₄ - (Vmax*C₄)/(Km + C₄) - kclear*(C₁ + C₂)*C₄
-```
-Where:
-- Term 1 = Diffusion (ascending vagus nerve)
-- Term 2 = Michaelis-Menten trapping by hydrogel (sink)
-- Term 3 = Drug-induced clearance (pharmacodynamics)
+## 4. Release-kinetic audit
 
-**Boundary Conditions:**
-- **Left (x=0):** Zero flux (drugs stay in tissue)
-- **Right (x=L):** Constant alpha--synuclein influx (EEC shedding)
-- **Gel region (0 ≤ x ≤ Lgel):** Source terms active
-- **Tissue region (Lgel < x ≤ L):** No source terms
+Earlier code used two first-order depletion terms:
 
-**Numerical Implementation:**
-- **Discretization:** Finite differences (200 spatial points)
-- **Time Integration:** `scipy.integrate.solve_ivp` (BDF method for stiffness)
-- **Validation:** MATLAB `pdepe` solver (independent implementation)
-- **Multiphysics:** FEniCSx poroelastic coupling (see `fenicsx_poroelastic.py`)
-
-**Code:** https://github.com/artistso/synapshield/tree/main/simulations
-
----
-
-## 3. Results
-
-### 3.1 Computational Validation: alpha--Synuclein Interception
-
-**Key Metric:** alpha--synuclein concentration at vagus nerve boundary (`x = Lgel = 0.5 mm`)
-
-| Time | C₄ at x=0.5mm [mol/m^3] | Reduction |
-|------|--------------------------|-----------|
-| t=0  | 1.00x10⁻^2               | -         |
-| t=1 day | 2.31x10⁻^3            | 76.9%     |
-| t=7 days | 5.42x10⁻⁴           | 94.6%     |
-| t=30 days | 8.91x10⁻⁵          | 99.1%     |
-| t=1 year | <1.00x10⁻⁶          | >99.99%   |
-
-**Validation Criterion:** `C₄(x=Lgel) < 0.01 x C₄,initial` → **✓ PASSED**
-
-The hydrogel successfully acts as a "pathological sink," trapping >94% of alpha--synuclein before it can reach the vagus nerve terminal.
-
-### 3.2 Drug Release Profile
-
-**Caffeine/CGA:** Rapid initial release (half-life ≈ 13 hours), then sustained micro-dosing over 15 years.
-
-**Ibuprofen:** Slower release kinetics (designed for chronic anti-inflammatory effect without gastric ulceration).
-
-**Zero Systemic Toxicity:** Because drugs are released at nanogram scales directly into submucosal tissue, plasma concentrations remain below detection limits. No gastric ulcers, no renal damage.
-
-### 3.3 Shear-Thinning Validation
-
-**Injection Force:** <5 N (compatible with 22-gauge endoscopic needle)
-
-**Post-Injection Gelation:** <2 seconds (HRP crosslinking)
-
-**Mechanical Stability:** Withstands cyclic compressive loading (peristalsis) for >10⁸ cycles without displacement.
-
-**FEniCSx poroelastic validation:** Confirms gel localization within 0.5mm, no migration under peristaltic load.
-
----
-
-## 4. Discussion
-
-### 4.1 The "Hope, Not Science" Philosophy
-
-Behind every equation is a person. Behind every simulation is a patient waiting for a cure. SynapShield isn't just a hydrogel-it's a promise that we can intercept neurodegenerative disease before it steals someone's future.
-
-> **"This is about hope, not just science."**
-
-### 4.2 Comparison to Existing Therapies
-
-| Therapy | Mechanism | Limitations | SynapShield Advantage |
-|---------|-----------|-------------|------------------------|
-| **Levodopa** | Dopamine precursor | Only after 60% neurons lost | Intercepts BEFORE neurons die |
-| **Deep Brain Stimulation** | Electrical pacing | Invasive, hardware risks | Non-electronic, biochemical |
-| **Stem Cell Therapy** | Cell replacement | Immunosuppression, tumors | No cells needed |
-| **Oral Ibuprofen** | Anti-inflammatory | Gastric ulcers, short half-life | Localized, 15-year release |
-
-### 4.3 Computational Breakthrough: 4-Species Model
-
-Previous computational models of PD therapeutics only tracked drug concentrations. **SynapShield is the first to model the pathogen (alpha--synuclein) itself**, proving that the hydrogel intercepts the disease cascade at the molecular level.
-
-**Reproducibility:** Full source code available at https://github.com/artistso/synapshield  
-**ORCID:** 0009-0006-0211-4812  
-**Preprint:** medRxiv 10.1101/TBD
-
----
-
-## 5. Conclusion
-
-We have designed, modeled, and computationally validated SynapShield: a bioengineered hydrogel that intercepts Parkinson's disease at its gut-brain origin. By targeting the vagus nerve interface 15-20 years before motor symptoms appear, SynapShield offers a paradigm shift from **reactive** to **interceptive** neurodegenerative therapeutics.
-
-**Key Achievements:**
-1. ✅ 4-species PDE model (drugs + pathogen)
-2. ✅ >94% alpha--synuclein reduction at vagal boundary (7d), >99.99% (1yr)
-3. ✅ 15-year zero-order drug release profile
-4. ✅ Shear-thinning injectable biomaterial
-5. ✅ FEniCSx poroelastic multiphysics validation
-6. ✅ Open-source computational validation (MIT)
-
-**Next Steps:**
-- In vitro validation (porcine tissue explants)
-- In vivo studies (alpha--synuclein PFF mouse model)
-- FDA Pre-Investigational New Drug (Pre-IND) application
-- First-in-human clinical trial (Phase 0, microdosing)
-
----
-
-## 6. Dedication
-
-This work is dedicated to **Richard**, whose courage in the face of Parkinson's inspired this project. May SynapShield intercept what Parkinson's destroys.
-
-> **"From PDEs to Richard's tablet."**
-
----
-
-## 7. References
-
-[1] Braak, H., et al. (2003). "Staging of brain pathology related to sporadic Parkinson's disease." *Neurobiology of Aging*, 24(2), 197-211. doi:10.1016/S0197-4580(02)00065-9
-
-[2] Kim, S., et al. (2019). "Transneuronal propagation of alpha--synuclein from the gut to the brain." *Nature Neuroscience*, 22(8), 1235-1243. doi:10.1038/s41593-019-0449-7
-
-[3] Herschel, W.H. & Bulkley, R. (1926). "Konsistenzmessungen von Gummi-Benzollösungen." *Kolloid-Zeitschrift*, 39(4), 291-300.
-
-[4] Michaelis, L. & Menten, M.L. (1913). "Die Kinetik der Invertinwirkung." *Biochemische Zeitschrift*, 49, 333-369.
-
-[5] PPMI (Parkinson's Progression Markers Initiative). Data portal: https://www.ppmi-info.org/
-
-[6] Owens, S. (2026). SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface. *medRxiv*. doi:10.1101/TBD - ORCID: 0009-0006-0211-4812
-
----
-
-## 8. Data / Code Availability
-
-- **Repository:** https://github.com/artistso/synapshield
-- **License:** MIT
-- **DOI (software):** 10.5281/zenodo.TBD
-- **Preprint:** medRxiv 10.1101/TBD
-- **ORCID:** https://orcid.org/0009-0006-0211-4812
-- **Live Demo:** https://artistso.github.io/synapshield/
-
-All simulation code, PDE solvers (Python, MATLAB, FEniCSx), and documentation are open-source under MIT License.
-
-```
-synapshield/
-├── index.html                          # Interactive web app
-├── README.md                          # Project overview
-├── LICENSE                            # MIT
-├── CITATION.cff                       # Machine-readable citation
-├── codemeta.json                      # CodeMeta
-├── .zenodo.json                       # Zenodo
-├── AUTHORS.md                         # Author / ORCID
-├── TECHNICAL_PAPER.md                # This file
-├── docs/
-│   ├── CLINICAL_BRIEFING.md         # CPT 43256 protocol
-│   └── math-models.md               # PDE derivations
-├── simulations/
-│   ├── python/
-│   │   ├── synapshield_pde_solver.py  # 4-species solver
-│   │   ├── fenicsx_poroelastic.py
-│   │   └── multiphysics_integration.py
-│   ├── matlab/
-│   │   └── synapshield_pde_solver.m
-│   └── results/
-└── data/
+```text
+dC3/dt = -(1.5e-5 + 1.0e-6) C3.
 ```
 
----
+Thus
 
-## 9. How to Cite This Work
-
-**medRxiv Preprint (APA 7th):**
-
-> Owens, S. (2026). *SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface - A Bioengineered Hydrogel Approach with Computational Validation*. medRxiv. https://doi.org/10.1101/TBD
-
-**MLA:**
-
-> Owens, Steven. "SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface." *medRxiv*, 30 June 2026, https://github.com/artistso/synapshield. ORCID: 0009-0006-0211-4812.
-
-**BibTeX:**
-
-```bibtex
-@article{owens2026synapshield,
-  author  = {Owens, Steven},
-  title   = {SynapShield: Intercepting Parkinson's Disease at the Gut-Brain Interface},
-  journal = {medRxiv},
-  year    = {2026},
-  month   = {jun},
-  doi     = {10.1101/TBD},
-  url     = {https://github.com/artistso/synapshield},
-  orcid   = {0009-0006-0211-4812},
-  note    = {Preprint under review. Dedicated to Richard.}
-}
-
-@software{synapshield2026,
-  author       = {Owens, Steven},
-  title        = {SynapShield: Parkinson's Interception Technology},
-  year         = {2026},
-  version      = {v1.0.1},
-  publisher    = {GitHub},
-  doi          = {10.5281/zenodo.TBD},
-  url          = {https://github.com/artistso/synapshield},
-  orcid        = {0009-0006-0211-4812},
-  license      = {MIT}
-}
+```text
+k_total = 1.6e-5 s^-1
+half-life = ln(2)/k_total ≈ 4.33e4 s ≈ 12.0 h
+C3(1 year)/C3(0) = exp(-k_total × 1 year) ≈ 7.3e-220.
 ```
 
-**CITATION.cff:** See repository root.
+That implementation cannot support a 10–15 year release claim. Long-duration release must be established from measured material degradation, diffusion, binding, geometry, and loading—not from selecting an extremely small rate constant.
 
----
+## 5. Mechanics audit
 
-**🧠 Hope, not just science. 🧠**
+Earlier scripts claimed durability over `10^5` to `10^8` cycles while simulating approximately 10 seconds. They also contained formulation defects, including use of undefined test functions and construction of the nonlinear problem before adding traction. Version 0.2 replaces “validation” language with a transparent linear-elastic sanity check:
 
-*"From the mind to the machine to the world."*
+```text
+strain scale ≈ pressure / Young's modulus.
+```
 
----
+For `5 kPa / 50 kPa`, the strain scale is `0.1` or 10%. This does not predict retention, fatigue, damage, interface delamination, or poroelastic response.
 
-**Author:** Steven Owens - ORCID: [0009-0006-0211-4812](https://orcid.org/0009-0006-0211-4812)  
-**Affiliation:** Computational Bioengineering Laboratory, Ocean Shores, Washington, USA  
-**Preprint:** medRxiv - 10.1101/TBD (submitted June 30, 2026)  
-**License:** MIT - Open-source, because curing neurodegenerative disease is a human right, not a privilege  
-**Contact:** [@artistso](https://github.com/artistso) | [artistso/synapshield](https://github.com/artistso/synapshield) | artistso@github.com
+## 6. Reproducibility
 
-**Dedicated to Richard - Ocean Shores, Washington**
+Automated tests cover:
+
+- finite and nonnegative concentrations;
+- source boundary preservation;
+- matched no-sink control;
+- zero-sink equivalence;
+- closed-form release arithmetic;
+- uncertainty-summary consistency;
+- mechanics sanity arithmetic.
+
+Continuous integration runs on Python 3.10–3.12 and uploads a JSON model report.
+
+## 7. Uncertainty
+
+The optional sweep varies four synthetic parameters independently over one order of magnitude above and below nominal values. This is not Bayesian calibration. It is a stress test that makes parameter dependence visible.
+
+Any reported result must include:
+
+- nominal parameters and units;
+- control output;
+- solver status;
+- uncertainty range;
+- grid/time convergence;
+- provenance for every empirically derived parameter;
+- a statement that clinical interpretation is unsupported.
+
+## 8. Biological uncertainty
+
+The gut-first/body-first hypothesis is plausible for some Parkinson’s phenotypes but is neither universal nor sufficient to validate this intervention. The model omits:
+
+- brain-first disease;
+- α-synuclein species and seeding activity;
+- cellular production and clearance;
+- enteric and vagal anatomy;
+- immune and microbiome effects;
+- transport barriers and competing proteins;
+- toxicology and device failure modes.
+
+## 9. Required experiments
+
+Before any therapeutic language is used, the following must be measured:
+
+1. binding affinity, capacity, selectivity, and reversibility for defined α-synuclein species;
+2. whether captured material remains seeding-competent;
+3. hydrogel rheology, swelling, degradation, sterilization stability, and leachables;
+4. release kinetics under relevant pH, enzymes, flow, and mechanical loading;
+5. epithelial cytotoxicity, inflammatory signaling, and barrier integrity;
+6. retention, migration, ulceration, obstruction, retrieval, and systemic exposure;
+7. realistic transport using measured geometry and boundary conditions.
+
+## 10. Ethics and publication status
+
+This repository does not claim a verified IRB waiver, clinical-trial status, public preprint DOI, or peer review. Such statements require publicly verifiable documentation. No private person is a patient partner, study participant, or testimonial source in this work.
+
+## 11. Conclusion
+
+Version 0.2 converts SynapShield from a claimed treatment into what the evidence supports: an exploratory computational hypothesis with controls, tests, explicit limitations, and a sequence of experiments capable of falsifying it.
